@@ -48,22 +48,24 @@ public class TCList {
 	 *
 	 * @param project_code String 
 	 */
-	public void run(String projectCode, String protocol){
-		System.out.println("Project Code: " + projectCode + ", Protocol: " + protocol);
+	public void run(String projectCode/*, String protocol*/){
+		System.out.println("Project Code: " + projectCode/* + ", Protocol: " + protocol*/);
 		
-		db.loadProject(projectCode, Protocol.BySymbol(protocol));
+		db.loadProject(projectCode/*, Protocol.BySymbol(protocol)*/);
 		project = db.getProject(projectCode);
 		
-		db.loadPics(project, Protocol.BySymbol(protocol));
-		db.loadConditions(project, Protocol.BySymbol(protocol));
+		db.loadPics(project/*, Protocol.BySymbol(protocol)*/);
+		db.loadConditions(project/*, Protocol.BySymbol(protocol)*/);
 		//-----------Solve Conditions----------
 		run(project);
 		//-------------------------------------
-		db.getTestcase(project, Protocol.BySymbol(protocol));
+		db.getTestcase(project/*, Protocol.BySymbol(protocol)*/);
 		db.uploadError();
 		System.out.println("Solving Conditon is Done.");
 		// --------------------------------------
 	}
+	
+	
 	
 	private void run(Project project){
 		

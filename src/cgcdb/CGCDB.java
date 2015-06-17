@@ -48,9 +48,23 @@ public class CGCDB {
 	} 
 	
 	
+	public void loadProject(String projectCode){
+		PROJECT_CODE_LIST = new ArrayList<String>();
+		PROJECTS = new HashMap<String, Project>();
+		try {
+			getProject2G(projectCode);
+			getProject3G(projectCode);
+			getProjectLTE(projectCode);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
 	public void loadProject(String projectCode, Protocol protocol){
 		PROJECT_CODE_LIST = new ArrayList<String>();
 		PROJECTS = new HashMap<String, Project>();
+
 		try {
 			if(protocol == Protocol._2G)
 				getProject2G(projectCode);
@@ -62,6 +76,7 @@ public class CGCDB {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	private void getProject2G(String projectCode) throws SQLException{
 		// Load [PROJRUN] 2G
@@ -159,7 +174,15 @@ public class CGCDB {
 		rs.close();
 	}
 	
+	public void loadPics(Project project){
+		load2GPics(project);
+		load3GPics(project);
+		loadLTEPics(project);
+
+	}
+	
 	public void loadPics(Project project, Protocol protocol){
+
 		if(protocol == Protocol._2G)
 			load2GPics(project);
 		else if(protocol == Protocol._3G)
@@ -168,7 +191,14 @@ public class CGCDB {
 			loadLTEPics(project);
 	}
 	
+	public void loadConditions(Project project){
+		load2GCondtion(project);
+		load3GCondtion(project);
+		loadLTECondtion(project);
+	}
+	
 	public void loadConditions(Project project, Protocol protocol){
+
 		if(protocol == Protocol._2G)
 			load2GCondtion(project);
 		else if(protocol == Protocol._3G)
@@ -431,6 +461,12 @@ public class CGCDB {
 		}
 	}
 	
+	public void getTestcase(Project project){
+		get2GTestcase(project);
+		get3GTestcase(project);
+		getLTETestcase(project);
+	}
+	
 	public void getTestcase(Project project, Protocol protocol){
 		if(protocol == Protocol._2G)
 			get2GTestcase(project);
@@ -439,6 +475,7 @@ public class CGCDB {
 		else if(protocol == Protocol._LTE)
 			getLTETestcase(project);
 	}
+	
 	
 	private void get2GTestcase(Project project){
 		String SQL;

@@ -32,7 +32,7 @@ public class Test {
   		TCList tcList = new TCList(con, "NTUTC");
   		
   		// Start to Execute Solving Test Case Condition
-  		tcList.run("LYW100", "2G");
+  		tcList.run("LHIF00");
   		//tcList.run("LYW100", "3G");
   	}
   	
